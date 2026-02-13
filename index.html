@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Для Даниила ❤️ от Алисы</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ОБЩИЕ СТИЛИ — нежный валентиновый стиль, адаптивность */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            line-height: 1.5;
+            background-color: #1a0e0e;
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.55);
+            border-bottom: 1px solid rgba(255, 182, 193, 0.4);
+        }
+
+        .section.bright-overlay {
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.25);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+            text-shadow: 1px 1px 5px black;
+        }
+
+        .heart-icon {
+            color: #ff6b81;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* СЧЕТЧИК ВРЕМЕНИ */
+        .counter-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .time-block {
+            background: rgba(255, 105, 135, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 20px 15px;
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .time-number {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #ffe9f0;
+        }
+
+        .time-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffd9e2;
+            margin-top: 8px;
+        }
+
+        /* СЛАЙДЕР ФОТО */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            aspect-ratio: 1 / 1;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slider-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slider-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.6);
+            color: #b13b4b;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-btn:hover {
+            background: white;
+            color: #ff4d6d;
+        }
+
+        .prev {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: #ff4d6d;
+            transform: scale(1.2);
+        }
+
+        /* МУЗЫКАЛЬНЫЙ БЛОК — ПОЛНОЕ ЦЕНТРИРОВАНИЕ */
+        .music-player {
+            background: rgba(255, 192, 203, 0.25);
+            backdrop-filter: blur(8px);
+            padding: 40px 30px;
+            border-radius: 50px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,240,0.6);
+            width: 100%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .music-icon {
+            font-size: 3.5rem;
+            color: #ffe6eb;
+            margin-bottom: 20px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .music-text {
+            font-style: italic;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .wave-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            height: 60px;
+            margin: 25px 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .wave-animation.playing {
+            opacity: 1;
+        }
+
+        .wave-animation.paused {
+            opacity: 0.4;
+        }
+
+        .wave-bar {
+            width: 8px;
+            height: 20px;
+            background: #ffa5b0;
+            border-radius: 10px;
+            animation: wave 1.2s infinite ease-in-out;
+            animation-play-state: running;
+        }
+
+        .wave-bar.paused {
+            animation-play-state: paused;
+        }
+
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; background: #ffb6c1; height: 35px; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; background: #ffc0cb; height: 25px; }
+        .wave-bar:nth-child(4) { animation-delay: 0.6s; background: #ffb6c1; height: 40px; }
+        .wave-bar:nth-child(5) { animation-delay: 0.8s; background: #ffa5b0; height: 30px; }
+        .wave-bar:nth-child(6) { animation-delay: 1.0s; background: #ff99aa; height: 20px; }
+        .wave-bar:nth-child(7) { animation-delay: 0.3s; background: #ffa5b0; height: 35px; }
+        .wave-bar:nth-child(8) { animation-delay: 0.7s; background: #ffb6c1; height: 25px; }
+        .wave-bar:nth-child(9) { animation-delay: 0.1s; background: #ffc0cb; height: 30px; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.6); }
+            50% { transform: scaleY(1.2); }
+        }
+
+        .unlock-audio-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            margin: 15px auto;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
+        }
+
+        .unlock-audio-btn:hover {
+            background: #ff1a4d;
+            transform: scale(1.05);
+        }
+
+        .music-status {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(255, 77, 109, 0.25);
+            border-radius: 40px;
+            font-size: 1rem;
+            margin: 15px auto 5px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        /* АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            p { font-size: 1.1rem; }
+            .section {
+                background-attachment: scroll;
+                padding: 40px 15px;
+                min-height: 100vh;
+            }
+            .time-number { font-size: 2.2rem; }
+            .time-block { min-width: 90px; padding: 15px 8px; }
+            .slider-container { max-width: 100%; }
+            .music-player {
+                padding: 30px 20px;
+                max-width: 95%;
+            }
+            .music-text {
+                font-size: 1.2rem;
+            }
+            .unlock-audio-btn {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.9rem; }
+            .counter-wrapper { gap: 12px; }
+            .time-block { min-width: 70px; padding: 12px 5px; }
+            .time-number { font-size: 1.8rem; }
+            .time-label { font-size: 0.7rem; }
+        }
+
+        /* КНОПКА "БЕГИ К АЛИСЕ" */
+        .love-button {
+            display: inline-block;
+            margin-top: 30px;
+            background: #ff4d6d;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 18px 45px;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.5);
+            border: 2px solid #ffe6eb;
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .love-button:hover {
+            background: #ff1a4d;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.7);
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        #bg-audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- БЛОК 1: ПРИВЕТСТВИЕ -->
+    <section class="section" style="background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1974&auto=format&fit=crop');">
+        <div class="container">
+            <div class="heart-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>Даниил, это специальная валентинка</h1>
+            <p style="font-size: 1.8rem; font-weight: 600;">для тебя от человека... 💌</p>
+            <p style="font-size: 1.2rem; margin-top: 30px;">Ты — самое тёплое, что случилось в этом году. И каждый день с тобой — подарок.</p>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: СЧЕТЧИК ВРЕМЕНИ -->
+    <section class="section" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop');">
+        <div class="container">
+            <p style="font-size: 1.4rem;">С которым ты познакомился 19 сентября 2025, а это значит, что...</p>
+            <h2>✨ Вы знакомы уже ✨</h2>
+
+            <div class="counter-wrapper" id="timer">
+                <div class="time-block">
+                    <div class="time-number" id="days">00</div>
+                    <div class="time-label">Дней</div>
+                </div>
+                <div class="time-block">
+                    <div class="time-number" id="hours">00</div>
+                    <div class="time-label">Часов</div>
+                </div>
+                <div class="time-block">
+                    <div class="time-number" id="minutes">00</div>
+                    <div class="time-label">Минут</div>
+                </div>
+                <div class="time-block">
+                    <div class="time-number" id="seconds">00</div>
+                    <div class="time-label">Секунд</div>
+                </div>
+            </div>
+            <p style="margin-top: 40px;">И это только начало вашей истории...</p>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ВРЕМЯ ВМЕСТЕ + СЛАЙДЕР (ЯРКИЙ ФОН) -->
+    <section class="section bright-overlay" style="background-image: url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=2080&auto=format&fit=crop');">
+        <div class="container">
+            <i class="fas fa-clock heart-icon" style="color: #ffb6c1; font-size: 2.8rem;"></i>
+            <h2 style="font-family: 'Playfair Display';">Влюбленные часов не наблюдают...</h2>
+            <p>За такой короткий период вы столько всего попробовали вместе, что собрался целый багаж счастливых воспоминаний. Вы не останавливаетесь, генерируете идеи и чувствуете, что время пролетает незаметно. И это прекрасно.</p>
+
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-slide"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop" alt="Фото 1"></div>
+                    <div class="slider-slide"><img src="https://images.unsplash.com/photo-1529333320936-e2193f4e3b2d?w=600&auto=format&fit=crop" alt="Фото 2"></div>
+                    <div class="slider-slide"><img src="https://images.unsplash.com/photo-1499428665502-503f6c608263?w=600&auto=format&fit=crop" alt="Фото 3"></div>
+                    <div class="slider-slide"><img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&auto=format&fit=crop" alt="Фото 4"></div>
+                </div>
+                <button class="slider-btn prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 4: МУЗЫКАЛЬНЫЙ БЛОК -->
+    <section class="section bright-overlay" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop');" id="musicSection">
+        <div class="container">
+            <div class="music-player" id="musicPlayer">
+                <div class="music-icon">
+                    <i class="fas fa-headphones-alt"></i>
+                </div>
+                <p class="music-text">Эта песня была с вами, когда вы первый раз пошли гулять, провели время вместе и начали влюбляться друг в друга...</p>
+
+                <!-- КНОПКА ДЛЯ ПЕРВОГО ВКЛЮЧЕНИЯ (будет скрыта после активации) -->
+                <button class="unlock-audio-btn" id="unlockAudioBtn">
+                    <i class="fas fa-play"></i> Нажми, чтобы включить музыку
+                </button>
+
+                <div class="wave-animation" id="waveAnimation">
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                </div>
+
+                <div class="music-status" id="musicStatus">
+                    ⏸ Нажми на кнопку, чтобы включить музыку
+                </div>
+            </div>
+        </div>
+        <audio id="bg-audio" loop>
+            <source src="static_files/audio/murat-nasyrov-ja-jeto-ty_i1CYHuuR.mp3" type="audio/mpeg">
+        </audio>
+    </section>
+
+    <!-- БЛОК 5: 14.11.2025 — ПЕРВОЕ «ЛЮБЛЮ» -->
+    <section class="section" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop');">
+        <div class="container">
+            <i class="fas fa-heart" style="font-size: 3.5rem; color: #ff99aa; margin-bottom: 20px;"></i>
+            <h2>💕 14 ноября 2025 💕</h2>
+            <p style="font-size: 1.7rem; font-weight: 600;">День, когда вы впервые сказали друг другу «люблю».</p>
+            <p>С тех пор это слово звучит чаще, но ценность его не изменилась — оно всё такое же робкое и бесконечно нежное.</p>
+        </div>
+    </section>
+
+    <!-- БЛОК 6: ПРИЗНАНИЕ + АВТОР -->
+    <section class="section" style="background-image: url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?q=80&w=1986&auto=format&fit=crop');">
+        <div class="container">
+            <h2 style="font-size: 2.5rem;">Ладно, пора назвать автора валентики по имени...</h2>
+            <p style="font-size: 2rem; background: rgba(255,105,135,0.4); display: inline-block; padding: 10px 30px; border-radius: 60px; backdrop-filter: blur(5px); margin: 30px 0;">
+                Алиса ❤️
+            </p>
+            <p style="font-size: 1.6rem; font-weight: 600;">В День Святого Валентина</p>
+            <p style="font-size: 1.4rem; margin-bottom: 20px;">она хочет сказать, как сильно любит тебя.</p>
+            <div style="position: relative;">
+                <a href="#" class="love-button" id="hugButton">
+                    Беги скорее в её объятия и поцелуи! <i class="fas fa-heart" style="margin-left: 10px;"></i>
+                </a>
+            </div>
+            <p style="font-size: 1.2rem; margin-top: 30px;">Ты — самое тёплое, что случилось в этом году. И каждый день с тобой — подарок.</p>
+
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ========== 1. СЧЕТЧИК ВРЕМЕНИ ==========
+            function updateTimer() {
+                const startDate = new Date('2025-09-19T17:00:00');
+                const now = new Date();
+                const diff = now - startDate;
+
+                if (diff < 0) {
+                    document.getElementById('days').innerText = '00';
+                    document.getElementById('hours').innerText = '00';
+                    document.getElementById('minutes').innerText = '00';
+                    document.getElementById('seconds').innerText = '00';
+                    return;
+                }
+
+                const seconds = Math.floor(diff / 1000) % 60;
+                const minutes = Math.floor(diff / (1000 * 60)) % 60;
+                const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                document.getElementById('days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+
+            // ========== 2. СЛАЙДЕР ==========
+            const track = document.getElementById('sliderTrack');
+            const slides = Array.from(document.querySelectorAll('.slider-slide'));
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            const dots = document.querySelectorAll('.dot');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            function updateSlider(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
+            nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => updateSlider(i));
+            });
+
+            let touchStartX = 0;
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            track.addEventListener('touchend', (e) => {
+                const diffX = e.changedTouches[0].screenX - touchStartX;
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) updateSlider(currentIndex - 1);
+                    else updateSlider(currentIndex + 1);
+                }
+            });
+
+            // ========== 3. МУЗЫКА — РЕШЕНИЕ ПРОБЛЕМЫ АВТОЗАПУСКА ==========
+            const audio = document.getElementById('bg-audio');
+            const musicSection = document.getElementById('musicSection');
+            const waveBars = document.querySelectorAll('.wave-bar');
+            const waveAnimation = document.getElementById('waveAnimation');
+            const musicStatus = document.getElementById('musicStatus');
+            const unlockBtn = document.getElementById('unlockAudioBtn');
+
+            // Флаг, была ли музыка активирована пользователем
+            let isAudioUnlocked = false;
+
+            // Функция обновления UI для музыки
+            function updateMusicUI(isPlaying) {
+                if (isPlaying) {
+                    waveAnimation.classList.add('playing');
+                    waveAnimation.classList.remove('paused');
+                    waveBars.forEach(bar => {
+                        bar.classList.remove('paused');
+                    });
+                    musicStatus.innerHTML = '🎵 Сейчас играет наша песня';
+                    musicStatus.style.background = 'rgba(255, 77, 109, 0.4)';
+                    unlockBtn.style.display = 'none';
+                } else {
+                    waveAnimation.classList.remove('playing');
+                    waveAnimation.classList.add('paused');
+                    waveBars.forEach(bar => {
+                        bar.classList.add('paused');
+                    });
+
+                    // Показываем разную подпись в зависимости от того, разблокировано аудио или нет
+                    if (isAudioUnlocked) {
+                        musicStatus.innerHTML = '⏸ Музыка на паузе. Нажми на волны';
+                        unlockBtn.style.display = 'none';
+                    } else {
+                        musicStatus.innerHTML = '🔇 Нажми на кнопку, чтобы включить музыку';
+                        unlockBtn.style.display = 'inline-flex';
+                    }
+                    musicStatus.style.background = 'rgba(255, 77, 109, 0.2)';
+                }
+            }
+
+            // Функция включения музыки
+            function playMusic() {
+                if (!isAudioUnlocked) {
+                    console.log('Аудио ещё не разблокировано пользователем');
+                    return;
+                }
+
+                audio.play()
+                    .then(() => {
+                        console.log('Музыка включена');
+                        updateMusicUI(true);
+                    })
+                    .catch(err => {
+                        console.log('Не удалось включить музыку:', err);
+                        updateMusicUI(false);
+                    });
+            }
+
+            // Функция выключения музыки
+            function pauseMusic() {
+                if (!isAudioUnlocked) return;
+
+                if (!audio.paused) {
+                    audio.pause();
+                    console.log('Музыка остановлена');
+                    updateMusicUI(false);
+                }
+            }
+
+            // РАЗБЛОКИРОВКА АУДИО - первое нажатие кнопки
+            function unlockAudio() {
+                if (isAudioUnlocked) return;
+
+                console.log('Разблокировка аудио...');
+
+                // Пытаемся воспроизвести
+                audio.play()
+                    .then(() => {
+                        // Успешно! Аудио разблокировано
+                        isAudioUnlocked = true;
+                        console.log('Аудио успешно разблокировано!');
+
+                        // Ставим на паузу сразу после разблокировки
+                        audio.pause();
+
+                        // Обновляем UI
+                        updateMusicUI(false);
+
+                        // Теперь можно использовать Intersection Observer
+                        setupMusicObserver();
+                    })
+                    .catch(err => {
+                        console.log('Не удалось разблокировать аудио:', err);
+                        alert('Нажми на кнопку ещё раз, чтобы включить музыку ❤️');
+                    });
+            }
+
+            // Настройка наблюдателя за скроллом (только после разблокировки)
+            function setupMusicObserver() {
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                playMusic();
+                            } else {
+                                pauseMusic();
+                            }
+                        });
+                    }, {
+                        threshold: 0.3,
+                    });
+
+                    observer.observe(musicSection);
+                }
+            }
+
+            // Обработчик для кнопки разблокировки
+            unlockBtn.addEventListener('click', unlockAudio);
+
+            // Клик по волнам - включить/выключить (только после разблокировки)
+            waveAnimation.addEventListener('click', function() {
+                if (!isAudioUnlocked) {
+                    unlockAudio();
+                    return;
+                }
+
+                if (audio.paused) {
+                    playMusic();
+                } else {
+                    pauseMusic();
+                }
+            });
+
+            // Кнопка "Беги к Алисе" - тоже разблокирует и включает
+            document.getElementById('hugButton').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (!isAudioUnlocked) {
+                    unlockAudio();
+                }
+
+                if (isAudioUnlocked && audio.paused) {
+                    playMusic();
+                }
+
+                alert('Алиса уже ждет тебя! ❤️');
+            });
+
+            // Пауза при сворачивании вкладки
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && isAudioUnlocked) {
+                    pauseMusic();
+                }
+            });
+
+            // Инициализация UI
+            updateMusicUI(false);
+
+            // Добавляем подсказку для мобильных устройств
+            if ('ontouchstart' in window) {
+                console.log('Мобильное устройство - требуется касание для разблокировки аудио');
+            }
+
+            // Пробуем разблокировать аудио при первом скролле (для десктопа)
+            window.addEventListener('scroll', function onFirstScroll() {
+                if (!isAudioUnlocked) {
+                    // Создаём тихий аудио-контекст для разблокировки
+                    const silentAudio = new Audio();
+                    silentAudio.play()
+                        .then(() => {
+                            silentAudio.pause();
+                            // Теперь основной аудио элемент должен работать
+                            audio.load(); // перезагружаем
+                        })
+                        .catch(() => {});
+                }
+                window.removeEventListener('scroll', onFirstScroll);
+            }, { once: true });
+
+        })();
+    </script>
+
+    <!-- Инструкция по замене контента -->
+    <!--
+        🎵 КАК ТЕПЕРЬ РАБОТАЕТ МУЗЫКА:
+
+        1. Сначала пользователь должен нажать на кнопку "Нажми, чтобы включить музыку"
+           (это требование браузера — аудио может начать играть только после действия пользователя)
+
+        2. После первого нажатия:
+           - Аудио разблокируется
+           - Кнопка исчезнет
+           - Включится автоматическое управление при скролле
+
+        3. Дальше:
+           - Когда блок с музыкой виден — играет
+           - Когда уходишь с блока — останавливается
+           - Можно вкл/выкл кликом по волнам
+           - При сворачивании вкладки — пауза
+
+        ⚠️ ВАЖНО: Это единственный рабочий способ автозапуска в современных браузерах!
+    -->
+</body>
+</html>
